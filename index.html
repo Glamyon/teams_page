@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goaoxor Team Library</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --radius: 8px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--light-bg);
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            background-color: var(--light-bg);
+            border-radius: 20px;
+            padding: 2px;
+        }
+        
+        .lang-btn {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 20px;
+            background: transparent;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+        
+        /* Top Actions */
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-container {
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--light-bg);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+        
+        /* Team List */
+        .team-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .team-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .team-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .team-contact {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-available {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-busy {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .status-paused {
+            background-color: rgba(100, 116, 139, 0.1);
+            color: var(--text-secondary);
+        }
+        
+        .team-details {
+            margin-top: 1rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            width: 40%;
+            color: var(--text-secondary);
+        }
+        
+        .detail-value {
+            width: 60%;
+        }
+        
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tag {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .team-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-small {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--light-bg);
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+        
+        .modal {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        /* Detail Modal Styles */
+        .detail-modal {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .detail-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .detail-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+        
+        .detail-content {
+            margin-top: 1rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            width: 40%;
+            color: var(--text-secondary);
+        }
+        
+        .detail-value {
+            width: 60%;
+            word-break: break-word;
+        }
+        
+        /* Form Styles */
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--danger-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-control.select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 16px;
+            appearance: none;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding: 1rem 1.5rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state-text {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .team-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .top-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            
+            .btn-add {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1 id="site-title">Goaoxor Team Library</h1>
+                </div>
+                <div class="language-toggle">
+                    <button class="lang-btn active" id="lang-en">EN</button>
+                    <button class="lang-btn" id="lang-zh">中文</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="main-content">
+            <div class="top-actions">
+                <div class="search-container">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search-input" class="search-input" placeholder="Search by team name, service type...">
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="add-team-btn">Add New Team</button>
+            </div>
+            
+            <div id="team-list-container" class="team-list">
+                <!-- Team cards will be dynamically inserted here -->
+            </div>
+            
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">👥</div>
+                <h3 class="empty-state-text" id="empty-title">No teams found</h3>
+                <p id="empty-description">Try adjusting your search or add a new team.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Team Form Modal -->
+    <div class="modal-overlay" id="team-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Add New Team</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            
+            <form id="team-form">
+                <div class="modal-body">
+                    <div class="form-section">
+                        <h3 class="section-title" id="section-basic">Basic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="team_name" class="required" id="label-team-name">Team Name</label>
+                                <input type="text" id="team_name" class="form-control" required>
+                                <div class="error-message" id="error-team-name">Please enter a team name</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_name" class="required" id="label-contact-name">Contact Name</label>
+                                <input type="text" id="contact_name" class="form-control" required>
+                                <div class="error-message" id="error-contact-name">Please enter a contact name</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact_email" class="required" id="label-contact-email">Contact Email</label>
+                                <input type="email" id="contact_email" class="form-control" required>
+                                <div class="error-message" id="error-contact-email">Please enter a valid email</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="service_types" class="required" id="label-service-types">Service Types</label>
+                                <select id="service_types" class="form-control select" multiple required>
+                                    <option value="web-dev">Web Development</option>
+                                    <option value="mobile-dev">Mobile Development</option>
+                                    <option value="ui-ux">UI/UX Design</option>
+                                    <option value="marketing">Digital Marketing</option>
+                                    <option value="content">Content Creation</option>
+                                    <option value="seo">SEO</option>
+                                    <option value="video">Video Production</option>
+                                </select>
+                                <div class="error-message" id="error-service-types">Please select at least one service type</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="languages" id="label-languages">Team Languages</label>
+                                <input type="text" id="languages" class="form-control" placeholder="English, Chinese, Spanish...">
+                            </div>
+                            <div class="form-group">
+                                <label for="price_range" id="label-price-range">Price Range</label>
+                                <select id="price_range" class="form-control select">
+                                    <option value="">Select price range</option>
+                                    <option value="budget">$ (Budget)</option>
+                                    <option value="standard">$$ (Standard)</option>
+                                    <option value="premium">$$$ (Premium)</option>
+                                    <option value="enterprise">$$$$ (Enterprise)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="availability" id="label-availability">Availability</label>
+                                <select id="availability" class="form-control select">
+                                    <option value="available">Available</option>
+                                    <option value="busy">Busy</option>
+                                    <option value="paused">Paused</option>
+                                </select>
+                            </div>
+                            <div class="form-group"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3 class="section-title" id="section-operational">Operational Data</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="clients_introduced" id="label-clients-introduced">Clients Introduced</label>
+                                <input type="number" id="clients_introduced" class="form-control" min="0" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="total_project_value" id="label-total-project">Total Project Value ($)</label>
+                                <input type="number" id="total_project_value" class="form-control" min="0" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="value_created" id="label-value-created">Value Created for Us ($)</label>
+                                <input type="number" id="value_created" class="form-control" min="0" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="contract_links" id="label-contract-links">Contract Links / Notes</label>
+                                <input type="text" id="contract_links" class="form-control" placeholder="Links or notes about contracts">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes" id="label-notes">Additional Notes</label>
+                            <textarea id="notes" class="form-control" rows="3" placeholder="Any additional information about the team..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="delete-btn" style="display: none;">Delete Team</button>
+                    <button type="submit" class="btn btn-primary" id="save-team-btn">Save Team</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Team Details Modal -->
+    <div class="modal-overlay" id="detail-modal" style="display: none;">
+        <div class="detail-modal">
+            <div class="detail-header">
+                <h3 class="detail-title" id="detail-title">Team Details</h3>
+                <button class="detail-close" id="detail-close">&times;</button>
+            </div>
+            <div class="detail-content" id="detail-content">
+                <!-- Detail content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language data
+        const languageData = {
+            en: {
+                siteTitle: "Goaoxor Team Library",
+                searchPlaceholder: "Search by team name, service type, language, or availability...",
+                addTeam: "Add New Team",
+                editTeam: "Edit Team",
+                saveTeam: "Save Team",
+                cancel: "Cancel",
+                deleteTeam: "Delete Team",
+                viewDetails: "View Details",
+                edit: "Edit",
+                sectionBasic: "Basic Information",
+                sectionOperational: "Operational Data",
+                teamName: "Team Name",
+                contactName: "Contact Name",
+                contactEmail: "Contact Email",
+                services: "Services",
+                languages: "Languages",
+                price: "Price Range",
+                availability: "Availability",
+                clientsIntroduced: "Clients Introduced",
+                totalProject: "Total Project Value",
+                valueCreated: "Value Created",
+                contractLinks: "Contract Links",
+                notes: "Notes",
+                statusAvailable: "Available",
+                statusBusy: "Busy",
+                statusPaused: "Paused",
+                serviceWebDev: "Web Development",
+                serviceMobileDev: "Mobile Development",
+                serviceUiUx: "UI/UX Design",
+                serviceMarketing: "Digital Marketing",
+                serviceContent: "Content Creation",
+                serviceSeo: "SEO",
+                serviceVideo: "Video Production",
+                priceBudget: "$ (Budget)",
+                priceStandard: "$$ (Standard)",
+                pricePremium: "$$$ (Premium)",
+                priceEnterprise: "$$$$ (Enterprise)",
+                emptyTitle: "No teams found",
+                emptyDescription: "Try adjusting your search or add a new team."
+            },
+            zh: {
+                siteTitle: "Goaoxor 团队库",
+                searchPlaceholder: "按团队名称、服务类型、语言或可用状态搜索...",
+                addTeam: "新增团队",
+                editTeam: "编辑团队",
+                saveTeam: "保存团队",
+                cancel: "取消",
+                deleteTeam: "删除团队",
+                viewDetails: "查看详情",
+                edit: "编辑",
+                sectionBasic: "基础信息",
+                sectionOperational: "运营数据",
+                teamName: "团队名称",
+                contactName: "联系人姓名",
+                contactEmail: "联系人邮箱",
+                services: "服务类型",
+                languages: "团队语言",
+                price: "价格区间",
+                availability: "可用状态",
+                clientsIntroduced: "已介绍客户次数",
+                totalProject: "工程总金额",
+                valueCreated: "为我们创造的价值",
+                contractLinks: "合同文件链接",
+                notes: "备注",
+                statusAvailable: "空闲",
+                statusBusy: "繁忙",
+                statusPaused: "暂停",
+                serviceWebDev: "网站开发",
+                serviceMobileDev: "移动开发",
+                serviceUiUx: "UI/UX设计",
+                serviceMarketing: "数字营销",
+                serviceContent: "内容创作",
+                serviceSeo: "SEO",
+                serviceVideo: "视频制作",
+                priceBudget: "$ (经济)",
+                priceStandard: "$$ (标准)",
+                pricePremium: "$$$ (高级)",
+                priceEnterprise: "$$$$ (企业)",
+                emptyTitle: "未找到团队",
+                emptyDescription: "尝试调整搜索条件或添加新团队。"
+            }
+        };
+
+        // Initial team data
+        const initialTeams = [
+            {
+                id: 1,
+                team_name: "Web Solutions Inc.",
+                contact_name: "John Smith",
+                contact_email: "john@websolutions.com",
+                service_types: ["web-dev", "ui-ux", "seo"],
+                languages: "English, Spanish",
+                price_range: "premium",
+                availability: "available",
+                clients_introduced: 12,
+                total_project_value: 85000,
+                value_created: 15000,
+                contract_links: "Contract #WS-2023-001",
+                notes: "Excellent communication, delivers ahead of schedule."
+            },
+            {
+                id: 2,
+                team_name: "Mobile Masters",
+                contact_name: "Lisa Chen",
+                contact_email: "lisa@mobilemasters.co",
+                service_types: ["mobile-dev", "web-dev"],
+                languages: "English, Chinese, Japanese",
+                price_range: "standard",
+                availability: "busy",
+                clients_introduced: 8,
+                total_project_value: 65000,
+                value_created: 12000,
+                contract_links: "Contract #MM-2023-005",
+                notes: "Specializes in React Native and Flutter apps."
+            }
+        ];
+
+        // Current language
+        let currentLang = 'en';
+        
+        // Team data
+        let teams = JSON.parse(JSON.stringify(initialTeams));
+        
+        // Current team ID for editing (null for new team)
+        let currentTeamId = null;
+
+        // DOM elements
+        const langEnBtn = document.getElementById('lang-en');
+        const langZhBtn = document.getElementById('lang-zh');
+        const siteTitle = document.getElementById('site-title');
+        const searchInput = document.getElementById('search-input');
+        const addTeamBtn = document.getElementById('add-team-btn');
+        const teamListContainer = document.getElementById('team-list-container');
+        const emptyState = document.getElementById('empty-state');
+        const emptyTitle = document.getElementById('empty-title');
+        const emptyDescription = document.getElementById('empty-description');
+        const teamModal = document.getElementById('team-modal');
+        const modalClose = document.getElementById('modal-close');
+        const cancelBtn = document.getElementById('cancel-btn');
+        const teamForm = document.getElementById('team-form');
+        const modalTitle = document.getElementById('modal-title');
+        const deleteBtn = document.getElementById('delete-btn');
+        const saveTeamBtn = document.getElementById('save-team-btn');
+        const detailModal = document.getElementById('detail-modal');
+        const detailClose = document.getElementById('detail-close');
+
+        // Form elements
+        const teamNameInput = document.getElementById('team_name');
+        const contactNameInput = document.getElementById('contact_name');
+        const contactEmailInput = document.getElementById('contact_email');
+        const serviceTypesInput = document.getElementById('service_types');
+        const languagesInput = document.getElementById('languages');
+        const priceRangeInput = document.getElementById('price_range');
+        const availabilityInput = document.getElementById('availability');
+        const clientsIntroducedInput = document.getElementById('clients_introduced');
+        const totalProjectValueInput = document.getElementById('total_project_value');
+        const valueCreatedInput = document.getElementById('value_created');
+        const contractLinksInput = document.getElementById('contract_links');
+        const notesInput = document.getElementById('notes');
+
+        // Switch language
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update language buttons
+            langEnBtn.classList.toggle('active', lang === 'en');
+            langZhBtn.classList.toggle('active', lang === 'zh');
+            
+            // Update all text on page
+            updatePageText(lang);
+            
+            // Re-render team list with new language
+            renderTeamList(searchInput.value);
+        }
+
+        // Update all text on page based on language
+        function updatePageText(lang) {
+            const texts = languageData[lang];
+            
+            // Header
+            siteTitle.textContent = texts.siteTitle;
+            searchInput.placeholder = texts.searchPlaceholder;
+            
+            // Buttons
+            addTeamBtn.textContent = texts.addTeam;
+            saveTeamBtn.textContent = texts.saveTeam;
+            cancelBtn.textContent = texts.cancel;
+            deleteBtn.textContent = texts.deleteTeam;
+            
+            // Modal
+            modalTitle.textContent = currentTeamId ? texts.editTeam : texts.addTeam;
+            
+            // Sections
+            document.getElementById('section-basic').textContent = texts.sectionBasic;
+            document.getElementById('section-operational').textContent = texts.sectionOperational;
+            
+            // Labels
+            document.getElementById('label-team-name').innerHTML = texts.teamName + ' <span class="required-text">*</span>';
+            document.getElementById('label-contact-name').innerHTML = texts.contactName + ' <span class="required-text">*</span>';
+            document.getElementById('label-contact-email').innerHTML = texts.contactEmail + ' <span class="required-text">*</span>';
+            document.getElementById('label-service-types').innerHTML = texts.services + ' <span class="required-text">*</span>';
+            document.getElementById('label-languages').textContent = texts.languages;
+            document.getElementById('label-price-range').textContent = texts.price;
+            document.getElementById('label-availability').textContent = texts.availability;
+            document.getElementById('label-clients-introduced').textContent = texts.clientsIntroduced;
+            document.getElementById('label-total-project').textContent = texts.totalProject;
+            document.getElementById('label-value-created').textContent = texts.valueCreated;
+            document.getElementById('label-contract-links').textContent = texts.contractLinks;
+            document.getElementById('label-notes').textContent = texts.notes;
+            
+            // Validation messages
+            document.getElementById('error-team-name').textContent = texts.teamName + ' is required';
+            document.getElementById('error-contact-name').textContent = texts.contactName + ' is required';
+            document.getElementById('error-contact-email').textContent = 'Please enter a valid email';
+            document.getElementById('error-service-types').textContent = 'Please select at least one service type';
+            
+            // Empty state
+            emptyTitle.textContent = texts.emptyTitle;
+            emptyDescription.textContent = texts.emptyDescription;
+            
+            // Update service types options
+            const serviceOptions = serviceTypesInput.options;
+            serviceOptions[0].text = texts.serviceWebDev;
+            serviceOptions[1].text = texts.serviceMobileDev;
+            serviceOptions[2].text = texts.serviceUiUx;
+            serviceOptions[3].text = texts.serviceMarketing;
+            serviceOptions[4].text = texts.serviceContent;
+            serviceOptions[5].text = texts.serviceSeo;
+            serviceOptions[6].text = texts.serviceVideo;
+            
+            // Update price range options
+            const priceOptions = priceRangeInput.options;
+            priceOptions[1].text = texts.priceBudget;
+            priceOptions[2].text = texts.priceStandard;
+            priceOptions[3].text = texts.pricePremium;
+            priceOptions[4].text = texts.priceEnterprise;
+            
+            // Update availability options
+            const availabilityOptions = availabilityInput.options;
+            availabilityOptions[0].text = texts.statusAvailable;
+            availabilityOptions[1].text = texts.statusBusy;
+            availabilityOptions[2].text = texts.statusPaused;
+        }
+
+        // Get service names from service type codes
+        function getServiceNames(serviceCodes) {
+            const serviceMap = {
+                'web-dev': languageData[currentLang].serviceWebDev,
+                'mobile-dev': languageData[currentLang].serviceMobileDev,
+                'ui-ux': languageData[currentLang].serviceUiUx,
+                'marketing': languageData[currentLang].serviceMarketing,
+                'content': languageData[currentLang].serviceContent,
+                'seo': languageData[currentLang].serviceSeo,
+                'video': languageData[currentLang].serviceVideo
+            };
+            
+            return serviceCodes.map(code => serviceMap[code]).join(', ');
+        }
+
+        // Get status text
+        function getStatusText(statusCode) {
+            const statusMap = {
+                'available': languageData[currentLang].statusAvailable,
+                'busy': languageData[currentLang].statusBusy,
+                'paused': languageData[currentLang].statusPaused
+            };
+            
+            return statusMap[statusCode] || statusCode;
+        }
+
+        // Get price text
+        function getPriceText(priceCode) {
+            const priceMap = {
+                'budget': languageData[currentLang].priceBudget,
+                'standard': languageData[currentLang].priceStandard,
+                'premium': languageData[currentLang].pricePremium,
+                'enterprise': languageData[currentLang].priceEnterprise
+            };
+            
+            return priceMap[priceCode] || priceCode;
+        }
+
+        // Render team list
+        function renderTeamList(filter = '') {
+            teamListContainer.innerHTML = '';
+            
+            // Filter teams based on search input
+            const filteredTeams = teams.filter(team => {
+                if (!filter) return true;
+                
+                const searchTerm = filter.toLowerCase();
+                return (
+                    team.team_name.toLowerCase().includes(searchTerm) ||
+                    team.contact_name.toLowerCase().includes(searchTerm) ||
+                    team.contact_email.toLowerCase().includes(searchTerm) ||
+                    team.languages.toLowerCase().includes(searchTerm) ||
+                    getServiceNames(team.service_types).toLowerCase().includes(searchTerm) ||
+                    getStatusText(team.availability).toLowerCase().includes(searchTerm)
+                );
+            });
+            
+            // Show empty state if no teams
+            if (filteredTeams.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            } else {
+                emptyState.style.display = 'none';
+            }
+            
+            // Create team cards
+            filteredTeams.forEach(team => {
+                const teamCard = document.createElement('div');
+                teamCard.className = 'team-card';
+                teamCard.setAttribute('data-id', team.id);
+                
+                const statusClass = `status-${team.availability}`;
+                const statusText = getStatusText(team.availability);
+                const priceText = getPriceText(team.price_range);
+                const serviceNames = getServiceNames(team.service_types);
+                
+                teamCard.innerHTML = `
+                    <div class="team-header">
+                        <div>
+                            <h3 class="team-name">${team.team_name}</h3>
+                            <p class="team-contact">${team.contact_name} • ${team.contact_email}</p>
+                        </div>
+                        <span class="status-badge ${statusClass}">${statusText}</span>
+                    </div>
+                    
+                    <div class="team-details">
+                        <div class="detail-row">
+                            <div class="detail-label">${languageData[currentLang].services}</div>
+                            <div class="detail-value">${serviceNames}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">${languageData[currentLang].languages}</div>
+                            <div class="detail-value">${team.languages}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">${languageData[currentLang].price}</div>
+                            <div class="detail-value">${priceText}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-actions">
+                        <button class="btn btn-outline btn-small btn-view" data-id="${team.id}">${languageData[currentLang].viewDetails}</button>
+                        <button class="btn btn-primary btn-small btn-edit" data-id="${team.id}">${languageData[currentLang].edit}</button>
+                    </div>
+                `;
+                
+                teamListContainer.appendChild(teamCard);
+            });
+            
+            // Add event listeners to view and edit buttons
+            document.querySelectorAll('.btn-view').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    viewTeamDetails(id);
+                });
+            });
+            
+            document.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    editTeam(id);
+                });
+            });
+        }
+
+        // View team details
+        function viewTeamDetails(id) {
+            const team = teams.find(t => t.id === id);
+            if (!team) return;
+            
+            const texts = languageData[currentLang];
+            const statusText = getStatusText(team.availability);
+            const priceText = getPriceText(team.price_range);
+            const serviceNames = getServiceNames(team.service_types);
+            
+            // Set modal title
+            document.getElementById('detail-title').textContent = `${texts.teamName}: ${team.team_name}`;
+            
+            // Build detail content
+            const detailContent = document.getElementById('detail-content');
+            detailContent.innerHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">${texts.contactName}</div>
+                    <div class="detail-value">${team.contact_name}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.contactEmail}</div>
+                    <div class="detail-value">${team.contact_email}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.services}</div>
+                    <div class="detail-value">${serviceNames}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.languages}</div>
+                    <div class="detail-value">${team.languages}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.price}</div>
+                    <div class="detail-value">${priceText}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.availability}</div>
+                    <div class="detail-value">
+                        <span class="status-badge status-${team.availability}">${statusText}</span>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.clientsIntroduced}</div>
+                    <div class="detail-value">${team.clients_introduced}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.totalProject}</div>
+                    <div class="detail-value">$${team.total_project_value.toLocaleString()}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.valueCreated}</div>
+                    <div class="detail-value">$${team.value_created.toLocaleString()}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.contractLinks}</div>
+                    <div class="detail-value">${team.contract_links}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">${texts.notes}</div>
+                    <div class="detail-value">${team.notes}</div>
+                </div>
+            `;
+            
+            // Show modal
+            detailModal.style.display = 'flex';
+        }
+
+        // Edit team
+        function editTeam(id) {
+            const team = teams.find(t => t.id === id);
+            if (!team) return;
+            
+            currentTeamId = id;
+            
+            // Fill form with team data
+            teamNameInput.value = team.team_name;
+            contactNameInput.value = team.contact_name;
+            contactEmailInput.value = team.contact_email;
+            
+            // Set service types (multiple select)
+            Array.from(serviceTypesInput.options).forEach(option => {
+                option.selected = team.service_types.includes(option.value);
+            });
+            
+            languagesInput.value = team.languages;
+            priceRangeInput.value = team.price_range;
+            availabilityInput.value = team.availability;
+            clientsIntroducedInput.value = team.clients_introduced;
+            totalProjectValueInput.value = team.total_project_value;
+            valueCreatedInput.value = team.value_created;
+            contractLinksInput.value = team.contract_links;
+            notesInput.value = team.notes;
+            
+            // Update modal title
+            modalTitle.textContent = languageData[currentLang].editTeam;
+            
+            // Show delete button
+            deleteBtn.style.display = 'block';
+            
+            // Show modal
+            teamModal.style.display = 'flex';
+            
+            // Clear any previous error messages
+            clearErrorMessages();
+        }
+
+        // Add new team
+        function addNewTeam() {
+            currentTeamId = null;
+            
+            // Reset form
+            teamForm.reset();
+            
+            // Update modal title
+            modalTitle.textContent = languageData[currentLang].addTeam;
+            
+            // Hide delete button
+            deleteBtn.style.display = 'none';
+            
+            // Show modal
+            teamModal.style.display = 'flex';
+            
+            // Clear any previous error messages
+            clearErrorMessages();
+        }
+
+        // Save team (create or update)
+        function saveTeam(e) {
+            e.preventDefault();
+            
+            // Validate form
+            if (!validateForm()) {
+                return;
+            }
+            
+            // Get form data
+            const teamData = {
+                team_name: teamNameInput.value,
+                contact_name: contactNameInput.value,
+                contact_email: contactEmailInput.value,
+                service_types: Array.from(serviceTypesInput.selectedOptions).map(option => option.value),
+                languages: languagesInput.value,
+                price_range: priceRangeInput.value,
+                availability: availabilityInput.value,
+                clients_introduced: parseInt(clientsIntroducedInput.value) || 0,
+                total_project_value: parseInt(totalProjectValueInput.value) || 0,
+                value_created: parseInt(valueCreatedInput.value) || 0,
+                contract_links: contractLinksInput.value,
+                notes: notesInput.value
+            };
+            
+            if (currentTeamId) {
+                // Update existing team
+                const index = teams.findIndex(t => t.id === currentTeamId);
+                if (index !== -1) {
+                    teams[index] = { ...teams[index], ...teamData };
+                }
+            } else {
+                // Add new team
+                const newId = teams.length > 0 ? Math.max(...teams.map(t => t.id)) + 1 : 1;
+                teamData.id = newId;
+                teams.push(teamData);
+            }
+            
+            // Close modal
+            teamModal.style.display = 'none';
+            
+            // Re-render team list
+            renderTeamList(searchInput.value);
+        }
+
+        // Delete team
+        function deleteTeam() {
+            if (!currentTeamId || !confirm(languageData[currentLang].deleteTeam + '?')) {
+                return;
+            }
+            
+            // Remove team from array
+            const index = teams.findIndex(t => t.id === currentTeamId);
+            if (index !== -1) {
+                teams.splice(index, 1);
+            }
+            
+            // Close modal
+            teamModal.style.display = 'none';
+            
+            // Re-render team list
+            renderTeamList(searchInput.value);
+        }
+
+        // Validate form
+        function validateForm() {
+            let isValid = true;
+            
+            // Clear previous error messages
+            clearErrorMessages();
+            
+            // Validate team name
+            if (!teamNameInput.value.trim()) {
+                showError('error-team-name');
+                isValid = false;
+            }
+            
+            // Validate contact name
+            if (!contactNameInput.value.trim()) {
+                showError('error-contact-name');
+                isValid = false;
+            }
+            
+            // Validate contact email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!contactEmailInput.value.trim() || !emailRegex.test(contactEmailInput.value)) {
+                showError('error-contact-email');
+                isValid = false;
+            }
+            
+            // Validate service types
+            const selectedServices = Array.from(serviceTypesInput.selectedOptions);
+            if (selectedServices.length === 0) {
+                showError('error-service-types');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        // Show error message
+        function showError(errorId) {
+            document.getElementById(errorId).style.display = 'block';
+        }
+
+        // Clear all error messages
+        function clearErrorMessages() {
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+        }
+
+        // Initialize the app
+        function init() {
+            // Set initial language
+            switchLanguage('en');
+            
+            // Render initial team list
+            renderTeamList();
+            
+            // Event listeners
+            langEnBtn.addEventListener('click', () => switchLanguage('en'));
+            langZhBtn.addEventListener('click', () => switchLanguage('zh'));
+            
+            addTeamBtn.addEventListener('click', addNewTeam);
+            modalClose.addEventListener('click', () => teamModal.style.display = 'none');
+            cancelBtn.addEventListener('click', () => teamModal.style.display = 'none');
+            detailClose.addEventListener('click', () => detailModal.style.display = 'none');
+            
+            // Close modal when clicking outside
+            teamModal.addEventListener('click', (e) => {
+                if (e.target === teamModal) {
+                    teamModal.style.display = 'none';
+                }
+            });
+            
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) {
+                    detailModal.style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            teamForm.addEventListener('submit', saveTeam);
+            saveTeamBtn.addEventListener('click', saveTeam);
+            deleteBtn.addEventListener('click', deleteTeam);
+            
+            // Search functionality
+            searchInput.addEventListener('input', (e) => {
+                renderTeamList(e.target.value);
+            });
+            
+            // Allow multiple selection in service types with Ctrl/Cmd key
+            serviceTypesInput.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                
+                const option = e.target;
+                option.selected = !option.selected;
+                
+                // Trigger change event
+                const event = new Event('change');
+                serviceTypesInput.dispatchEvent(event);
+            });
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
